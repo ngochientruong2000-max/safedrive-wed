@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeDrive - Dịch Vụ Lái Xe Hộ Cao Cấp & Đưa Người Say Về Nhà An Toàn</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e3a8a;       /* Navy Chuyên Nghiệp */
+            --accent: #f59e0b;        /* Vàng Hổ Phách An Toàn */
+            --accent-hover: #d97706;
+            --dark: #0f172a;          /* Slate Đậm Đà */
+            --light: #f8fafc;         /* Nền Sáng Sạch Sẽ */
+            --text-gray: #475569;
+            --white: #ffffff;
+            --success: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Top Notification Bar */
+        .promo-bar {
+            background-color: var(--dark);
+            color: var(--white);
+            text-align: center;
+            padding: 8px 10px;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        .promo-bar span {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Navigation */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .btn-nav-cta {
+            background-color: var(--primary);
+            color: var(--white) !important;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-weight: 700 !important;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .btn-nav-cta:hover {
+            background-color: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%), 
+                        url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=1920') no-repeat center center/cover;
+            color: var(--white);
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        @media (max-width: 968px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-text h1 span {
+            color: var(--accent);
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: #cbd5e1;
+            margin-bottom: 35px;
+            max-width: 600px;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .hero-badge-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+        }
+
+        .hero-badge-item i {
+            color: var(--accent);
+            font-size: 20px;
+        }
+
+        /* Booking Engine Widget */
+        .booking-widget {
+            background-color: var(--white);
+            border-radius: 24px;
+            padding: 35px;
+            color: var(--dark);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .booking-widget h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .booking-widget .subtitle {
+            font-size: 14px;
+            color: var(--text-gray);
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--dark);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 16px 14px 45px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 500;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+        }
+
+        .form-group i.input-icon {
+            position: absolute;
+            left: 18px;
+            top: 43px;
+            color: var(--text-gray);
+            font-size: 16px;
+        }
+
+        .btn-book-submit {
+            width: 100%;
+            background-color: var(--accent);
+            color: var(--dark);
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn-book-submit:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Features Section */
+        .section-padding {
+            padding: 90px 20px;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px auto;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            font-size: 16px;
+            color: var(--text-gray);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.02);
+            border: 1px solid #f1f5f9;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.06);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(30, 58, 138, 0.05);
+            color: var(--primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 25px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            font-size: 15px;
+            color: var(--text-gray);
+        }
+
+        /* Live Calculator & Matrix Pricing */
+        .pricing-section {
+            background-color: #f1f5f9;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .price-card {
+            background-color: var(--white);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .price-card.popular {
+            border-color: var(--accent);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--accent);
+            color: var(--dark);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .price-header {
+            padding: 35px 35px 25px 35px;
+            background-color: rgba(30, 58, 138, 0.02);
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .price-header h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .price-amount {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--dark);
+        }
+
+        .price-amount span {
+            font-size: 16px;
+            color: var(--text-gray);
+            font-weight: 500;
+        }
+
+        .price-body {
+            padding: 35px;
+        }
+
+        .price-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .price-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            color: var(--text-gray);
+        }
+
+        .price-features li i {
+            color: var(--success);
+            font-size: 16px;
+        }
+
+        /* B2B / Driver Registration Split Section */
+        .split-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background-color: var(--dark);
+            color: var(--white);
+        }
+
+        @media (max-width: 768px) {
+            .split-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .split-box {
+            padding: 80px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .split-left {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%),
+                        url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1000') no-repeat center center/cover;
+        }
+
+        .split-right {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 58, 138, 0.9) 100%),
+                        url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=1000') no-repeat center center/cover;
+            border-left: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .split-box h2 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .split-box h2 span {
+            color: var(--accent);
+        }
+
+        .split-box p {
+            font-size: 16px;
+            color: #cbd5e1;
+            margin-bottom: 35px;
+            max-width: 500px;
+        }
+
+        .btn-split {
+            align-self: flex-start;
+            background-color: var(--white);
+            color: var(--dark);
+            text-decoration: none;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn-split:hover {
+            background-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Trust & Insurance Callout */
+        .trust-banner {
+            background-color: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .trust-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .trust-container i {
+            font-size: 50px;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .trust-container h2 {
+            font-size: 30px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .trust-container p {
+            font-size: 16px;
+            color: #93c5fd;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0b0f19;
+            color: #94a3b8;
+            padding: 60px 20px 30px 20px;
+            font-size: 14px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-col ul a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: #94a3b8;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Promo top bar -->
+    <div class="promo-bar">
+        🔥 Nghị định 100/CP: Đã uống rượu bia, tuyệt đối không lái xe. Nhập mã <span>ANTOAN50</span> giảm ngay 50k cho chuyến đầu tiên!
+    </div>
+
+    <!-- Navigation Header -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-shield-halved"></i> Safe<span>Drive</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#features">Ưu Điểm</a></li>
+                <li><a href="#pricing">Bảng Giá</a></li>
+                <li><a href="#corporate">Doanh Nghiệp</a></li>
+                <li><a href="#driver-signup">Tuyển Tài Xế</a></li>
+                <li><a href="#" class="btn-nav-cta">Đặt Lập Tức</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Area with Live Engine Widget -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-text">
+                <h1>Bạn Giữ Cuộc Vui,<br>Chúng Tôi <span>Giữ Tay Lái</span></h1>
+                <p>Ứng dụng đặt tài xế hộ tống chuyên nghiệp hàng đầu. Đưa bạn và ô tô, xe máy của bạn về nhà an toàn tuyệt đối sau mỗi bữa tiệc bận rộn.</p>
+                <div class="hero-badges">
+                    <div class="hero-badge-item">
+                        <i class="fa-solid fa-user-check"></i>
+                        <span>Tài xế VIP 5 Sao</span>
+                    </div>
+                    <div class="hero-badge-item">
+                        <i class="fa-solid fa-clock"></i>
+                        <span>Có mặt sau 10 Phút</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Booking Form Card Widget -->
+            <div class="booking-widget">
+                <h3>Đặt Tài Xế Ngay</h3>
+                <p class="subtitle">An toàn, bảo mật và minh bạch chi phí</p>
+                <form action="#" onsubmit="alert('SafeDrive nhận đơn thành công! Tài xế đang kết nối với bạn.'); return false;">
+                    <div class="form-group">
+                        <label>Điểm đón của bạn</label>
+                        <i class="fa-solid fa-location-dot input-icon"></i>
+                        <input type="text" class="form-control" placeholder="Nhập tên nhà hàng, quán nhậu..." required value="Nhà hàng Hải Sản X, Quận 1">
+                    </div>
+                    <div class="form-group">
+                        <label>Điểm đến (Về nhà)</label>
+                        <i class="fa-solid fa-house-chimney input-icon"></i>
+                        <input type="text" class="form-control" placeholder="Nhập địa chỉ nhà riêng hoặc chung cư..." required value="Chung cư Vinhomes Central Park, Bình Thạnh">
+                    </div>
+                    <div class="form-group">
+                        <label>Loại xe cần lái hộ</label>
+                        <i class="fa-solid fa-car input-icon"></i>
+                        <select class="form-control" style="padding-left: 45px;">
+                            <option>Xe Ô tô (Số tự động / Số sàn)</option>
+                            <option>Xe Hạng Sang / Xe Đức (Mercedes, BMW, Audi...)</option>
+                            <option>Xe Máy (Tay ga / Xe số)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-book-submit">
+                        <i class="fa-solid fa-paper-plane"></i> Gọi Tài Xế Ngay
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section-padding">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Tại Sao Nên Chọn SafeDrive?</h2>
+                <p>Chúng tôi không chỉ lái xe, chúng tôi chịu trách nhiệm cao nhất đối với tài sản và sự an toàn của gia đình bạn.</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-id-card"></i></div>
+                    <h3>Tài Xế Chuẩn VIP</h3>
+                    <p>100% tài xế sở hữu bằng lái B2 trở lên, trên 3 năm kinh nghiệm thực tế, lý lịch tư pháp sạch và được đào tạo phong cách ứng xử lịch sự.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-shield-cat"></i></div>
+                    <h3>Bảo Hiểm Toàn Diện</h3>
+                    <p>Hợp tác chiến lược cùng đơn vị bảo hiểm lớn, cam kết đền bù 100% giá trị thiệt hại vật chất nếu xảy ra sự cố va quẹt trong quá trình di chuyển.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <h3>Phục Vụ Cấp Tốc</h3>
+                    <p>Thuật toán định vị thông minh giúp ghép nối tài xế gần bạn nhất. Chỉ từ 5 đến 15 phút, tài xế sẽ có mặt tại điểm hẹn.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Matrix Section -->
+    <section id="pricing" class="section-padding pricing-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Bảng Giá Dịch Vụ Minh Bạch</h2>
+                <p>Giá hiển thị rõ ràng trên ứng dụng trước khi đặt, cam kết không phát sinh phụ phí ẩn ngoài khung giờ.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <div class="price-header">
+                        <h3>Khung Giờ Ngày</h3>
+                        <div class="price-amount">150.000đ<span> / 5km đầu</span></div>
+                    </div>
+                    <div class="price-body">
+                        <ul class="price-features">
+                            <li><i class="fa-solid fa-circle-check"></i> Áp dụng từ 06:00 – 18:00</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Mỗi km tiếp theo: +15.000đ</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Thích hợp đi công tác, đưa đón sếp</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Bảo hiểm xe đi kèm miễn phí</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="price-card popular">
+                    <div class="popular-badge">Phổ Biến</div>
+                    <div class="price-header">
+                        <h3>Khung Giờ Tối</h3>
+                        <div class="price-amount">200.000đ<span> / 5km đầu</span></div>
+                    </div>
+                    <div class="price-body">
+                        <ul class="price-features">
+                            <li><i class="fa-solid fa-circle-check"></i> Áp dụng từ 18:00 – 22:00</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Mỗi km tiếp theo: +18.000đ</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Tối ưu cho tiệc tối, gặp đối tác</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Hỗ trợ đặt hộ cho người thân</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="price-card">
+                    <div class="price-header">
+                        <h3>Khung Đêm Cao Điểm</h3>
+                        <div class="price-amount">300.000đ<span> / 5km đầu</span></div>
+                    </div>
+                    <div class="price-body">
+                        <ul class="price-features">
+                            <li><i class="fa-solid fa-circle-check"></i> Áp dụng sau 22:00 đêm</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Mỗi km tiếp theo: +20.000đ</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Phục vụ xuyên đêm không phụ thu</li>
+                            <li><i class="fa-solid fa-circle-check"></i> Đội ngũ tài xế trực chiến đông đảo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust & Security Banner -->
+    <section class="trust-banner">
+        <div class="trust-container">
+            <i class="fa-solid fa-handshake-angle"></i>
+            <h2>Cam Kết Vàng Từ SafeDrive</h2>
+            <p>Chúng tôi hiểu rằng chiếc xe không chỉ là tài sản lớn mà còn là người bạn đồng hành của bạn. Do đó, quy trình kiểm soát chất lượng từ định vị GPS hành trình cho đến tác phong bàn giao chìa khóa xe đều được lưu vết 100% trên hệ thống để bạn hoàn toàn an tâm nghỉ ngơi ở ghế sau.</p>
+        </div>
+    </section>
+
+    <!-- Split Action Section for Corporate B2B and Driver Recruiting -->
+    <section class="split-section">
+        <div id="corporate" class="split-box split-left">
+            <h2>Giải Pháp Cho <span>Doanh Nghiệp</span></h2>
+            <p>Doanh nghiệp của bạn thường xuyên tiếp khách hàng VIP? Đăng ký gói B2B để nhận hóa đơn VAT, thanh toán trả sau định kỳ theo tháng và bảo vệ tuyệt đối an toàn cho đội ngũ nhân sự cốt lõi.</p>
+            <a href="#" class="btn-split" onclick="alert('Cảm ơn doanh nghiệp đã quan tâm! Bộ phận B2B sẽ liên hệ trong 15 phút.'); return false;">Ký Kết Hợp Đồng B2B</a>
+        </div>
+        <div id="driver-signup" class="split-box split-right">
+            <h2>Gia Nhập Đội Ngũ <span>Tài Xế Tài Năng</span></h2>
+            <p>Bạn có bằng lái B2/D/E, có kinh nghiệm lái xe dày dặn và muốn tối ưu hóa thời gian rảnh rỗi để gia tăng thu nhập từ 15 - 25 triệu/tháng? Trở thành đối tác đồng hành cùng đại gia đình SafeDrive ngay hôm nay.</p>
+            <a href="#" class="btn-split" onclick="alert('Vui lòng chuẩn bị CCCD, Bằng lái xe và Hồ sơ lý lịch để nộp tại văn phòng SafeDrive.'); return false;">Đăng Ký Ứng Tuyển</a>
+        </div>
+    </section>
+
+    <!-- Footer Area -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>Về SafeDrive</h4>
+                <p>Hệ thống công nghệ kết nối giải pháp tài xế hộ tống, cam kết kiến tạo cộng đồng tham gia giao thông văn minh, an toàn và hiện đại.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Dịch Vụ Trọng Tâm</h4>
+                <ul>
+                    <li><a href="#">Lái hộ người say về nhà</a></li>
+                    <li><a href="#">Thuê tài xế theo giờ</a></li>
+                    <li><a href="#">Đưa đón đối tác sự kiện</a></li>
+                    <li><a href="#">Tài xế riêng cho gia đình</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Liên Hệ Hỗ Trợ</h4>
+                <ul>
+                    <li>Địa chỉ: Tòa nhà Innovation, Quận 1, TP. HCM</li>
+                    <li>Hotline: 1900 xxxx (24/7)</li>
+                    <li>Email: support@safedrive.vn</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SafeDrive Vietnam. All rights reserved. Phát triển bởi Đội ngũ Công nghệ SafeDrive.</p>
+            <div class="social-links">
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
